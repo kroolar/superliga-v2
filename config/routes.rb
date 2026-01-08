@@ -13,5 +13,11 @@ Rails.application.routes.draw do
   # root "posts#index"
 
   resources :players, only: [ :index ]
-  root "players#index"
+  resources :games, only: [ :index, :show ] do
+    member do
+      post :generate_teams
+    end
+  end
+
+  root "games#index"
 end

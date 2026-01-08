@@ -38,12 +38,16 @@ end
 generate_games
 generate_players
 
-teams = Game.first.teams
+# Mark first game as played and set up teams with players
+first_game = Game.first
+first_game.update!(played: true)
+
+teams = first_game.teams
 
 [ 'Adrian', 'Artur', 'Tomek', 'Darek', 'Fasol' ].each do |player_name|
   player = Player.find_by(name: player_name)
   team = teams.first
-  team.players << player
+  team.players << player unless team.players.include?(player)
   team.result = -5
   team.save!
 end
@@ -51,7 +55,9 @@ end
 [ 'Bartek', 'Adam', 'Krzysztof', 'Krzysztof B.', 'Jacek' ].each do |player_name|
   player = Player.find_by(name: player_name)
   team = teams.last
-  team.players << player
+  team.players << player unless team.players.include?(player)
   team.result = 5
   team.save!
 end
+
+puts "Marked first game as played and assigned players to teams"

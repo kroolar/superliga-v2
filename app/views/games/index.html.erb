@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Games - Superliga 2026</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
+      background: #fafafa;
+      min-height: 100vh;
+      padding: 20px;
+      color: #0a0a0a;
+    }
+    
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    
+    header {
+      background: white;
+      border: 1px solid #e5e5e5;
+      border-radius: 8px;
+      padding: 30px;
+      margin-bottom: 24px;
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    }
+    
+    h1 {
+      color: #0a0a0a;
+      font-size: 2.5em;
+      font-weight: 700;
+      margin-bottom: 8px;
+      letter-spacing: -0.025em;
+    }
+    
+    .subtitle {
+      color: #737373;
+      font-size: 1em;
+      margin-bottom: 20px;
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 8px;
+      margin-top: 20px;
+    }
+    
+    .nav-links a {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 16px;
+      background: #0a0a0a;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 500;
+      font-size: 0.875rem;
+      transition: background 0.2s;
+    }
+    
+    .nav-links a:hover {
+      background: #262626;
+    }
+    
+    .nav-links a.secondary {
+      background: white;
+      color: #0a0a0a;
+      border: 1px solid #e5e5e5;
+    }
+    
+    .nav-links a.secondary:hover {
+      background: #f5f5f5;
+    }
+    
+    .games-section {
+      background: white;
+      border: 1px solid #e5e5e5;
+      border-radius: 8px;
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    }
+    
+    .section-title {
+      font-size: 1.5em;
+      font-weight: 600;
+      color: #0a0a0a;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #e5e5e5;
+      letter-spacing: -0.025em;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    
+    th {
+      background: #fafafa;
+      color: #525252;
+      padding: 12px 16px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid #e5e5e5;
+    }
+    
+    td {
+      padding: 16px;
+      border-bottom: 1px solid #f5f5f5;
+    }
+    
+    tbody tr {
+      transition: background 0.15s;
+    }
+    
+    tbody tr:hover {
+      background-color: #fafafa;
+    }
+    
+    .date-cell {
+      font-weight: 500;
+      color: #0a0a0a;
+      font-size: 0.95em;
+    }
+    
+    .status-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.025em;
+    }
+    
+    .status-played {
+      background: #f5f5f5;
+      color: #525252;
+      border: 1px solid #e5e5e5;
+    }
+    
+    .status-upcoming {
+      background: #0a0a0a;
+      color: white;
+    }
+    
+    .game-link {
+      color: #0a0a0a;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    
+    .game-link:hover {
+      color: #525252;
+      text-decoration: underline;
+    }
+    
+    .btn-generate {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 12px;
+      background: #0a0a0a;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 500;
+      font-size: 0.875rem;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    
+    .btn-generate:hover {
+      background: #262626;
+    }
+    
+    .teams-preview {
+      font-size: 0.875em;
+      color: #737373;
+    }
+    
+    .no-games {
+      text-align: center;
+      padding: 48px;
+      color: #a3a3a3;
+      font-size: 0.95em;
+    }
+    
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 1.8em;
+      }
+      
+      th, td {
+        padding: 10px 8px;
+        font-size: 0.85em;
+      }
+      
+      .nav-links {
+        flex-direction: column;
+      }
+      
+      .nav-links a {
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Superliga 2026</h1>
+      <p class="subtitle">Games Schedule & Results</p>
+      <div class="nav-links">
+        <%= link_to "All Games", root_path %>
+        <%= link_to "Players Statistics", players_path, class: "secondary" %>
+      </div>
+    </header>
+    
+    <!-- Upcoming Games Section -->
+    <div class="games-section">
+      <h2 class="section-title">Upcoming Games</h2>
+      <% if @upcoming_games.any? %>
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Status</th>
+              <th>Teams</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @upcoming_games.each do |game| %>
+              <tr>
+                <td class="date-cell">
+                  <%= link_to game.date.strftime('%A, %B %d, %Y'), game_path(game), class: 'game-link' %>
+                </td>
+                <td>
+                  <span class="status-badge status-upcoming">Upcoming</span>
+                </td>
+                <td class="teams-preview">
+                  <% if game.teams.any? %>
+                    <%= game.teams.count %> teams configured
+                  <% else %>
+                    No teams yet
+                  <% end %>
+                </td>
+                <td>
+                  <%= link_to "Generate Teams", generate_teams_game_path(game), method: :post, class: 'btn-generate' %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% else %>
+        <div class="no-games">No upcoming games scheduled</div>
+      <% end %>
+    </div>
+    
+    <!-- Played Games Section -->
+    <div class="games-section">
+      <h2 class="section-title">Played Games</h2>
+      <% if @played_games.any? %>
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Status</th>
+              <th>Teams</th>
+              <th>Result</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @played_games.each do |game| %>
+              <tr>
+                <td class="date-cell">
+                  <%= link_to game.date.strftime('%A, %B %d, %Y'), game_path(game), class: 'game-link' %>
+                </td>
+                <td>
+                  <span class="status-badge status-played">Played</span>
+                </td>
+                <td class="teams-preview">
+                  <%= game.teams.count %> teams
+                </td>
+                <td>
+                  <% if game.teams.any? %>
+                    <% game.teams.each_with_index do |team, index| %>
+                      Team <%= index + 1 %>: <%= team.result || 'N/A' %>
+                      <%= '<br>'.html_safe unless index == game.teams.count - 1 %>
+                    <% end %>
+                  <% else %>
+                    N/A
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% else %>
+        <div class="no-games">No games have been played yet</div>
+      <% end %>
+    </div>
+  </div>
+</body>
+</html>

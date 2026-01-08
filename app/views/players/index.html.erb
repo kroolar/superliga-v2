@@ -11,137 +11,161 @@
     }
     
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
+      background: #fafafa;
       min-height: 100vh;
       padding: 20px;
+      color: #0a0a0a;
     }
     
     .container {
       max-width: 1400px;
       margin: 0 auto;
       background: white;
-      border-radius: 12px;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+      border: 1px solid #e5e5e5;
+      border-radius: 8px;
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
       overflow: hidden;
     }
     
     header {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
+      background: white;
+      border-bottom: 1px solid #e5e5e5;
+      color: #0a0a0a;
       padding: 30px;
       text-align: center;
     }
     
     h1 {
       font-size: 2.5em;
-      margin-bottom: 10px;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+      font-weight: 700;
+      margin-bottom: 8px;
+      letter-spacing: -0.025em;
     }
     
     .subtitle {
-      font-size: 1.1em;
-      opacity: 0.9;
+      font-size: 1em;
+      color: #737373;
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    
+    .nav-links a {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 16px;
+      background: white;
+      color: #0a0a0a;
+      text-decoration: none;
+      border: 1px solid #e5e5e5;
+      border-radius: 6px;
+      font-weight: 500;
+      font-size: 0.875rem;
+      transition: background 0.2s;
+    }
+    
+    .nav-links a:hover {
+      background: #f5f5f5;
+    }
+    
+    .nav-links a.active {
+      background: #0a0a0a;
+      color: white;
+      border-color: #0a0a0a;
     }
     
     .table-wrapper {
       overflow-x: auto;
-      padding: 20px;
     }
     
     table {
       width: 100%;
-      border-collapse: separate;
-      border-spacing: 0;
+      border-collapse: collapse;
     }
     
     th {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
-      padding: 16px 12px;
+      background: #fafafa;
+      color: #525252;
+      padding: 12px 16px;
       text-align: left;
       font-weight: 600;
-      font-size: 0.95em;
+      font-size: 0.75rem;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid #e5e5e5;
       position: sticky;
       top: 0;
       z-index: 10;
     }
     
-    th:first-child {
-      border-radius: 8px 0 0 0;
-    }
-    
-    th:last-child {
-      border-radius: 0 8px 0 0;
-    }
-    
     td {
-      padding: 14px 12px;
-      border-bottom: 1px solid #e0e0e0;
+      padding: 16px;
+      border-bottom: 1px solid #f5f5f5;
     }
     
     tbody tr {
-      transition: all 0.2s ease;
+      transition: background 0.15s;
     }
     
     tbody tr:hover {
-      background-color: #f5f5ff;
-      transform: scale(1.01);
-      box-shadow: 0 2px 8px rgba(102, 126, 234, 0.1);
-    }
-    
-    tbody tr:nth-child(odd) {
       background-color: #fafafa;
     }
     
     .rank {
-      font-weight: bold;
-      color: #667eea;
-      font-size: 1.1em;
+      font-weight: 700;
+      color: #0a0a0a;
+      font-size: 1em;
       text-align: center;
+      font-variant-numeric: tabular-nums;
     }
     
     .player-name {
       font-weight: 600;
-      color: #333;
-      font-size: 1.05em;
+      color: #0a0a0a;
+      font-size: 0.95em;
     }
     
     .stat-number {
       font-weight: 600;
       text-align: center;
+      font-variant-numeric: tabular-nums;
+      color: #0a0a0a;
     }
     
     .wins {
-      color: #10b981;
+      color: #0a0a0a;
     }
     
     .draws {
-      color: #f59e0b;
+      color: #525252;
     }
     
     .losses {
-      color: #ef4444;
+      color: #737373;
     }
     
     .total-result {
-      font-weight: bold;
-      font-size: 1.1em;
+      font-weight: 700;
+      font-size: 1.05em;
       text-align: center;
+      font-variant-numeric: tabular-nums;
     }
     
     .total-result.positive {
-      color: #10b981;
+      color: #0a0a0a;
     }
     
     .total-result.negative {
-      color: #ef4444;
+      color: #737373;
     }
     
     .total-result.neutral {
-      color: #6b7280;
+      color: #a3a3a3;
     }
     
     .absence-rate {
@@ -163,31 +187,38 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.75em;
-      font-weight: bold;
-      color: white;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      transition: transform 0.2s ease;
+      font-size: 0.7em;
+      font-weight: 700;
+      border: 1.5px solid;
+      transition: transform 0.15s;
     }
     
     .game-box:hover {
-      transform: scale(1.2);
+      transform: scale(1.15);
     }
     
     .game-box.win {
-      background: linear-gradient(135deg, #10b981, #059669);
+      background: #0a0a0a;
+      color: white;
+      border-color: #0a0a0a;
     }
     
     .game-box.draw {
-      background: linear-gradient(135deg, #f59e0b, #d97706);
+      background: white;
+      color: #0a0a0a;
+      border-color: #0a0a0a;
     }
     
     .game-box.loss {
-      background: linear-gradient(135deg, #ef4444, #dc2626);
+      background: white;
+      color: #737373;
+      border-color: #e5e5e5;
     }
     
     .game-box.absence {
-      background: linear-gradient(135deg, #9ca3af, #6b7280);
+      background: #fafafa;
+      color: #a3a3a3;
+      border-color: #f5f5f5;
     }
     
     @media (max-width: 768px) {
@@ -210,8 +241,12 @@
 <body>
   <div class="container">
     <header>
-      <h1>🏆 Superliga 2026</h1>
+      <h1>Superliga 2026</h1>
       <p class="subtitle">Players Statistics & Rankings</p>
+      <div class="nav-links">
+        <%= link_to "All Games", root_path %>
+        <%= link_to "Players Statistics", players_path, class: "active" %>
+      </div>
     </header>
     
     <div class="table-wrapper">
