@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Players Statistics - Superliga</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+    
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+    }
+    
+    header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 30px;
+      text-align: center;
+    }
+    
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    
+    .subtitle {
+      font-size: 1.1em;
+      opacity: 0.9;
+    }
+    
+    .table-wrapper {
+      overflow-x: auto;
+      padding: 20px;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+    }
+    
+    th {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 16px 12px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 0.95em;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    
+    th:first-child {
+      border-radius: 8px 0 0 0;
+    }
+    
+    th:last-child {
+      border-radius: 0 8px 0 0;
+    }
+    
+    td {
+      padding: 14px 12px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    
+    tbody tr {
+      transition: all 0.2s ease;
+    }
+    
+    tbody tr:hover {
+      background-color: #f5f5ff;
+      transform: scale(1.01);
+      box-shadow: 0 2px 8px rgba(102, 126, 234, 0.1);
+    }
+    
+    tbody tr:nth-child(odd) {
+      background-color: #fafafa;
+    }
+    
+    .rank {
+      font-weight: bold;
+      color: #667eea;
+      font-size: 1.1em;
+      text-align: center;
+    }
+    
+    .player-name {
+      font-weight: 600;
+      color: #333;
+      font-size: 1.05em;
+    }
+    
+    .stat-number {
+      font-weight: 600;
+      text-align: center;
+    }
+    
+    .wins {
+      color: #10b981;
+    }
+    
+    .draws {
+      color: #f59e0b;
+    }
+    
+    .losses {
+      color: #ef4444;
+    }
+    
+    .total-result {
+      font-weight: bold;
+      font-size: 1.1em;
+      text-align: center;
+    }
+    
+    .total-result.positive {
+      color: #10b981;
+    }
+    
+    .total-result.negative {
+      color: #ef4444;
+    }
+    
+    .total-result.neutral {
+      color: #6b7280;
+    }
+    
+    .absence-rate {
+      text-align: center;
+      font-weight: 600;
+    }
+    
+    .last-games {
+      display: flex;
+      gap: 4px;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .game-box {
+      width: 28px;
+      height: 28px;
+      border-radius: 4px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75em;
+      font-weight: bold;
+      color: white;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s ease;
+    }
+    
+    .game-box:hover {
+      transform: scale(1.2);
+    }
+    
+    .game-box.win {
+      background: linear-gradient(135deg, #10b981, #059669);
+    }
+    
+    .game-box.draw {
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+    }
+    
+    .game-box.loss {
+      background: linear-gradient(135deg, #ef4444, #dc2626);
+    }
+    
+    .game-box.absence {
+      background: linear-gradient(135deg, #9ca3af, #6b7280);
+    }
+    
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 1.8em;
+      }
+      
+      th, td {
+        padding: 10px 6px;
+        font-size: 0.85em;
+      }
+      
+      .game-box {
+        width: 24px;
+        height: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🏆 Superliga 2026</h1>
+      <p class="subtitle">Players Statistics & Rankings</p>
+    </header>
+    
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Player</th>
+            <th>Games</th>
+            <th>Wins</th>
+            <th>Draws</th>
+            <th>Losses</th>
+            <th>Result</th>
+            <th>Absence %</th>
+            <th>Last 5 Games</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @players_stats.each_with_index do |stat, index| %>
+            <tr>
+              <td class="rank"><%= index + 1 %></td>
+              <td class="player-name"><%= stat[:player].name %></td>
+              <td class="stat-number"><%= stat[:games_played] %></td>
+              <td class="stat-number wins"><%= stat[:wins] %></td>
+              <td class="stat-number draws"><%= stat[:draws] %></td>
+              <td class="stat-number losses"><%= stat[:losses] %></td>
+              <td class="total-result <%= stat[:total_result] > 0 ? 'positive' : (stat[:total_result] < 0 ? 'negative' : 'neutral') %>">
+                <%= stat[:total_result] > 0 ? '+' : '' %><%= stat[:total_result] %>
+              </td>
+              <td class="absence-rate"><%= stat[:absence_rate] %>%</td>
+              <td>
+                <div class="last-games">
+                  <% stat[:last_5_teams].reverse.each do |team| %>
+                    <% 
+                      box_class = if team.result.nil?
+                        'absence'
+                      elsif team.result > 0
+                        'win'
+                      elsif team.result < 0
+                        'loss'
+                      else
+                        'draw'
+                      end
+                      
+                      box_symbol = case box_class
+                        when 'win' then 'W'
+                        when 'loss' then 'L'
+                        when 'draw' then 'D'
+                        when 'absence' then '-'
+                      end
+                    %>
+                    <div class="game-box <%= box_class %>" title="<%= team.game.date.strftime('%b %d') %>: <%= team.result || 'Absent' %>">
+                      <%= box_symbol %>
+                    </div>
+                  <% end %>
+                  <% (5 - stat[:last_5_teams].count).times do %>
+                    <div class="game-box absence" title="No game">
+                      -
+                    </div>
+                  <% end %>
+                </div>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>
