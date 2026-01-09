@@ -10,10 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_01_09_000001) do
+ActiveRecord::Schema[8.1].define(version: 2026_01_09_142516) do
   create_table "games", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "date"
+    t.string "location"
     t.boolean "played", default: false, null: false
     t.datetime "updated_at", null: false
   end

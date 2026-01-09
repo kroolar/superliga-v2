@@ -1,19 +1,22 @@
 class PlayersController < ApplicationController
   def index
-    @total_games = Game.count
+    # Get total played games (where played = true)
+    @total_played_games = Game.where(played: true).count
     players = Player.includes(teams: :game).all
 
     @players_stats = players.map do |player|
       teams = player.teams
-      games_played = teams.count
+      # Only count games that were actually played
+      games_played = teams.joins(:game).where(games: { played: true }).count
       wins = teams.where("result > 0").count
       draws = teams.where(result: 0).count
       losses = teams.where("result < 0").count
       total_result = teams.sum(:result)
-      absence_rate = @total_games > 0 ? (((@total_games - games_played).to_f / @total_games) * 100).round(1) : 0
+      # Calculate frequency: how many played games the player participated in
+      frequency = @total_played_games > 0 ? ((games_played.to_f / @total_played_games) * 100).round(1) : 0
 
-      # Get last 5 teams with their games, ordered by game date
-      last_5_teams = teams.joins(:game).order("games.date DESC").limit(5)
+      # Get last 5 played games with their teams, ordered by game date
+      last_5_teams = teams.joins(:game).where(games: { played: true }).order("games.date DESC").limit(5)
 
       {
         player: player,
@@ -22,7 +25,7 @@ class PlayersController < ApplicationController
         draws: draws,
         losses: losses,
         total_result: total_result,
-        absence_rate: absence_rate,
+        frequency: frequency,
         last_5_teams: last_5_teams
       }
     end

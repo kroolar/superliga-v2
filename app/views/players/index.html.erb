@@ -21,19 +21,19 @@
       transform: scale(1.15);
     }
     .game-box.win {
-      background: #0a0a0a;
+      background: #22c55e;
       color: white;
-      border-color: #0a0a0a;
+      border-color: #16a34a;
     }
     .game-box.draw {
-      background: white;
-      color: #0a0a0a;
-      border-color: #0a0a0a;
+      background: #fbbf24;
+      color: #78350f;
+      border-color: #f59e0b;
     }
     .game-box.loss {
-      background: white;
-      color: #737373;
-      border-color: #e5e5e5;
+      background: #ef4444;
+      color: white;
+      border-color: #dc2626;
     }
     .game-box.absence {
       background: #fafafa;
@@ -72,12 +72,12 @@
           <tr class="bg-neutral-50">
             <th class="px-3 md:px-4 py-3 text-left text-xs font-semibold text-neutral-600 uppercase tracking-wider border-b border-neutral-200">#</th>
             <th class="px-3 md:px-4 py-3 text-left text-xs font-semibold text-neutral-600 uppercase tracking-wider border-b border-neutral-200">Zawodnik</th>
-            <th class="px-3 md:px-4 py-3 text-center text-xs font-semibold text-neutral-600 uppercase tracking-wider border-b border-neutral-200 hidden sm:table-cell">Mecze</th>
+            <th class="px-3 md:px-4 py-3 text-center text-xs font-semibold text-neutral-600 uppercase tracking-wider border-b border-neutral-200">Mecze</th>
             <th class="px-3 md:px-4 py-3 text-center text-xs font-semibold text-neutral-600 uppercase tracking-wider border-b border-neutral-200">W</th>
-            <th class="px-3 md:px-4 py-3 text-center text-xs font-semibold text-neutral-600 uppercase tracking-wider border-b border-neutral-200 hidden md:table-cell">R</th>
-            <th class="px-3 md:px-4 py-3 text-center text-xs font-semibold text-neutral-600 uppercase tracking-wider border-b border-neutral-200 hidden md:table-cell">P</th>
+            <th class="px-3 md:px-4 py-3 text-center text-xs font-semibold text-neutral-600 uppercase tracking-wider border-b border-neutral-200">R</th>
+            <th class="px-3 md:px-4 py-3 text-center text-xs font-semibold text-neutral-600 uppercase tracking-wider border-b border-neutral-200">P</th>
             <th class="px-3 md:px-4 py-3 text-center text-xs font-semibold text-neutral-600 uppercase tracking-wider border-b border-neutral-200">Wynik</th>
-            <th class="px-3 md:px-4 py-3 text-center text-xs font-semibold text-neutral-600 uppercase tracking-wider border-b border-neutral-200 hidden lg:table-cell">Absencja</th>
+            <th class="px-3 md:px-4 py-3 text-center text-xs font-semibold text-neutral-600 uppercase tracking-wider border-b border-neutral-200">Frekwencja</th>
             <th class="px-3 md:px-4 py-3 text-center text-xs font-semibold text-neutral-600 uppercase tracking-wider border-b border-neutral-200">Ostatnie 5</th>
           </tr>
         </thead>
@@ -86,14 +86,14 @@
             <tr class="hover:bg-neutral-50 transition">
               <td class="px-3 md:px-4 py-3 md:py-4 border-b border-neutral-100 text-center font-bold text-neutral-900 tabular-nums"><%= index + 1 %></td>
               <td class="px-3 md:px-4 py-3 md:py-4 border-b border-neutral-100 font-semibold text-neutral-900 text-sm md:text-base"><%= stat[:player].name %></td>
-              <td class="px-3 md:px-4 py-3 md:py-4 border-b border-neutral-100 text-center font-semibold tabular-nums text-neutral-900 hidden sm:table-cell"><%= stat[:games_played] %></td>
+              <td class="px-3 md:px-4 py-3 md:py-4 border-b border-neutral-100 text-center font-semibold tabular-nums text-neutral-900"><%= stat[:games_played] %></td>
               <td class="px-3 md:px-4 py-3 md:py-4 border-b border-neutral-100 text-center font-semibold tabular-nums text-neutral-900"><%= stat[:wins] %></td>
-              <td class="px-3 md:px-4 py-3 md:py-4 border-b border-neutral-100 text-center font-semibold tabular-nums text-neutral-600 hidden md:table-cell"><%= stat[:draws] %></td>
-              <td class="px-3 md:px-4 py-3 md:py-4 border-b border-neutral-100 text-center font-semibold tabular-nums text-neutral-500 hidden md:table-cell"><%= stat[:losses] %></td>
-              <td class="px-3 md:px-4 py-3 md:py-4 border-b border-neutral-100 text-center font-bold text-base md:text-lg tabular-nums <%= stat[:total_result] > 0 ? 'text-neutral-900' : (stat[:total_result] < 0 ? 'text-neutral-500' : 'text-neutral-400') %>">
+              <td class="px-3 md:px-4 py-3 md:py-4 border-b border-neutral-100 text-center font-semibold tabular-nums text-neutral-900"><%= stat[:draws] %></td>
+              <td class="px-3 md:px-4 py-3 md:py-4 border-b border-neutral-100 text-center font-semibold tabular-nums text-neutral-900"><%= stat[:losses] %></td>
+              <td class="px-3 md:px-4 py-3 md:py-4 border-b border-neutral-100 text-center font-bold text-base md:text-lg tabular-nums text-neutral-900">
                 <%= stat[:total_result] > 0 ? '+' : '' %><%= stat[:total_result] %>
               </td>
-              <td class="px-3 md:px-4 py-3 md:py-4 border-b border-neutral-100 text-center font-semibold tabular-nums hidden lg:table-cell"><%= stat[:absence_rate] %>%</td>
+              <td class="px-3 md:px-4 py-3 md:py-4 border-b border-neutral-100 text-center font-semibold tabular-nums text-neutral-900"><%= stat[:frequency] %>%</td>
               <td class="px-3 md:px-4 py-3 md:py-4 border-b border-neutral-100">
                 <div class="flex gap-1 justify-center items-center">
                   <% stat[:last_5_teams].reverse.each do |team| %>
