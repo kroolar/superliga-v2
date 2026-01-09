@@ -22,3 +22,13 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+
+# Add taiwlind css 
+# One table for all games
+# Where the game was
+# 2 teams configured - remove
+# Generate teams
+# Add score for the player
+# Polish Version
+# Mobile Version

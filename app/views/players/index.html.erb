@@ -98,11 +98,22 @@
                 <div class="flex gap-1 justify-center items-center">
                   <% stat[:last_5_teams].reverse.each do |team| %>
                     <% 
+                      # Get opponent team to determine actual result
+                      opponent_team = team.game.teams.where.not(id: team.id).first
+                      
                       box_class = if team.result.nil?
                         'absence'
-                      elsif team.result > 0
+                      elsif opponent_team.nil? || opponent_team.result.nil?
+                        'absence'
+                      elsif team.result == 0 && opponent_team.result == 0
+                        'draw'
+                      elsif team.result == 0 && opponent_team.result > 0
+                        'loss'
+                      elsif team.result > 0 && opponent_team.result == 0
                         'win'
-                      elsif team.result < 0
+                      elsif team.result > opponent_team.result
+                        'win'
+                      elsif team.result < opponent_team.result
                         'loss'
                       else
                         'draw'

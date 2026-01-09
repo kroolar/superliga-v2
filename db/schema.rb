@@ -28,6 +28,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_09_142516) do
 
   create_table "team_players", force: :cascade do |t|
     t.datetime "created_at", null: false
+    t.boolean "goalkeeper", default: false, null: false
     t.integer "player_id", null: false
     t.integer "team_id", null: false
     t.datetime "updated_at", null: false

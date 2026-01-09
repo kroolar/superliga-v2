@@ -16,6 +16,9 @@ Rails.application.routes.draw do
   resources :games, only: [ :index, :show ] do
     member do
       get :generate_teams
+      post :create_teams
+      post :regenerate_teams
+      patch :update_result
     end
   end
 

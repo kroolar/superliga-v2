@@ -49,6 +49,68 @@
         `;
       }
     }
+
+    function submitTeams() {
+      const enabledPlayers = [];
+      const goalkeepers = [];
+
+      <% @players.each do |player| %>
+        const toggle<%= player.id %> = document.getElementById('toggle-<%= player.id %>');
+        const gkButton<%= player.id %> = document.getElementById('gk-<%= player.id %>');
+
+        if (toggle<%= player.id %>.checked) {
+          enabledPlayers.push(<%= player.id %>);
+
+          if (gkButton<%= player.id %>.dataset.goalkeeper === 'true') {
+            goalkeepers.push(<%= player.id %>);
+          }
+        }
+      <% end %>
+
+      if (enabledPlayers.length === 0) {
+        alert('Proszę wybrać zawodników');
+        return;
+      }
+
+      if (goalkeepers.length > 2) {
+        alert('Maksymalnie 2 bramkarzy mogą być przypisani');
+        return;
+      }
+
+      // Create form and submit
+      const form = document.createElement('form');
+      form.method = 'POST';
+      form.action = '<%= create_teams_game_path(@game) %>';
+
+      // Add CSRF token
+      const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
+      const csrfInput = document.createElement('input');
+      csrfInput.type = 'hidden';
+      csrfInput.name = 'authenticity_token';
+      csrfInput.value = csrfToken;
+      form.appendChild(csrfInput);
+
+      // Add enabled players
+      enabledPlayers.forEach(playerId => {
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'enabled_players[]';
+        input.value = playerId;
+        form.appendChild(input);
+      });
+
+      // Add goalkeepers
+      goalkeepers.forEach(playerId => {
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'goalkeepers[]';
+        input.value = playerId;
+        form.appendChild(input);
+      });
+
+      document.body.appendChild(form);
+      form.submit();
+    }
   </script>
 </head>
 <body class="bg-neutral-50 min-h-screen p-4 md:p-5">
@@ -130,6 +192,7 @@
         <%= link_to 'Anuluj', game_path(@game), class: 'inline-flex items-center justify-center px-5 py-2.5 bg-white text-neutral-900 border border-neutral-200 rounded-md font-medium text-sm hover:bg-neutral-50 transition' %>
         <button
           type="button"
+          onclick="submitTeams()"
           class="inline-flex items-center justify-center px-5 py-2.5 bg-neutral-900 text-white rounded-md font-medium text-sm hover:bg-neutral-800 transition"
         >
           Generuj Drużyny

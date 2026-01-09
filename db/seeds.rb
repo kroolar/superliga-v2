@@ -9,14 +9,7 @@ def generate_games
 
   # Create games for every Monday
   while current_date <= end_date
-    game = Game.find_or_create_by!(date: current_date.to_datetime)
-
-    # Create 2 teams for each game if they don't exist
-    if game.teams.count < 2
-      (2 - game.teams.count).times do
-        game.teams.create!
-      end
-    end
+    Game.find_or_create_by!(date: current_date.to_datetime)
 
     current_date += 7.days
   end
@@ -41,9 +34,9 @@ def generate_players
     { name: 'Tomek', power: 40 },
     { name: 'Adam', power: 20 }
   ].each do |player_data|
-    Player.find_or_create_by!(name: player_data[:name]) do |player|
-      player.power = player_data[:power]
-    end
+    player = Player.find_or_create_by!(name: player_data[:name])
+    player.power = player_data[:power]
+    player.save!
   end
 
   puts "Created #{Player.count} players"
