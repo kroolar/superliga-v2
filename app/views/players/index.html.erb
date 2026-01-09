@@ -3,183 +3,8 @@
 <head>
   <title>Players Statistics - Superliga</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
-      background: #fafafa;
-      min-height: 100vh;
-      padding: 20px;
-      color: #0a0a0a;
-    }
-    
-    .container {
-      max-width: 1400px;
-      margin: 0 auto;
-      background: white;
-      border: 1px solid #e5e5e5;
-      border-radius: 8px;
-      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-      overflow: hidden;
-    }
-    
-    header {
-      background: white;
-      border-bottom: 1px solid #e5e5e5;
-      color: #0a0a0a;
-      padding: 30px;
-      text-align: center;
-    }
-    
-    h1 {
-      font-size: 2.5em;
-      font-weight: 700;
-      margin-bottom: 8px;
-      letter-spacing: -0.025em;
-    }
-    
-    .subtitle {
-      font-size: 1em;
-      color: #737373;
-    }
-    
-    .nav-links {
-      display: flex;
-      gap: 8px;
-      justify-content: center;
-      margin-top: 20px;
-    }
-    
-    .nav-links a {
-      display: inline-flex;
-      align-items: center;
-      padding: 8px 16px;
-      background: white;
-      color: #0a0a0a;
-      text-decoration: none;
-      border: 1px solid #e5e5e5;
-      border-radius: 6px;
-      font-weight: 500;
-      font-size: 0.875rem;
-      transition: background 0.2s;
-    }
-    
-    .nav-links a:hover {
-      background: #f5f5f5;
-    }
-    
-    .nav-links a.active {
-      background: #0a0a0a;
-      color: white;
-      border-color: #0a0a0a;
-    }
-    
-    .table-wrapper {
-      overflow-x: auto;
-    }
-    
-    table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-    
-    th {
-      background: #fafafa;
-      color: #525252;
-      padding: 12px 16px;
-      text-align: left;
-      font-weight: 600;
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      border-bottom: 1px solid #e5e5e5;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-    }
-    
-    td {
-      padding: 16px;
-      border-bottom: 1px solid #f5f5f5;
-    }
-    
-    tbody tr {
-      transition: background 0.15s;
-    }
-    
-    tbody tr:hover {
-      background-color: #fafafa;
-    }
-    
-    .rank {
-      font-weight: 700;
-      color: #0a0a0a;
-      font-size: 1em;
-      text-align: center;
-      font-variant-numeric: tabular-nums;
-    }
-    
-    .player-name {
-      font-weight: 600;
-      color: #0a0a0a;
-      font-size: 0.95em;
-    }
-    
-    .stat-number {
-      font-weight: 600;
-      text-align: center;
-      font-variant-numeric: tabular-nums;
-      color: #0a0a0a;
-    }
-    
-    .wins {
-      color: #0a0a0a;
-    }
-    
-    .draws {
-      color: #525252;
-    }
-    
-    .losses {
-      color: #737373;
-    }
-    
-    .total-result {
-      font-weight: 700;
-      font-size: 1.05em;
-      text-align: center;
-      font-variant-numeric: tabular-nums;
-    }
-    
-    .total-result.positive {
-      color: #0a0a0a;
-    }
-    
-    .total-result.negative {
-      color: #737373;
-    }
-    
-    .total-result.neutral {
-      color: #a3a3a3;
-    }
-    
-    .absence-rate {
-      text-align: center;
-      font-weight: 600;
-    }
-    
-    .last-games {
-      display: flex;
-      gap: 4px;
-      justify-content: center;
-      align-items: center;
-    }
-    
     .game-box {
       width: 28px;
       height: 28px;
@@ -192,93 +17,85 @@
       border: 1.5px solid;
       transition: transform 0.15s;
     }
-    
     .game-box:hover {
       transform: scale(1.15);
     }
-    
     .game-box.win {
       background: #0a0a0a;
       color: white;
       border-color: #0a0a0a;
     }
-    
     .game-box.draw {
       background: white;
       color: #0a0a0a;
       border-color: #0a0a0a;
     }
-    
     .game-box.loss {
       background: white;
       color: #737373;
       border-color: #e5e5e5;
     }
-    
     .game-box.absence {
       background: #fafafa;
       color: #a3a3a3;
       border-color: #f5f5f5;
     }
-    
     @media (max-width: 768px) {
-      h1 {
-        font-size: 1.8em;
-      }
-      
-      th, td {
-        padding: 10px 6px;
-        font-size: 0.85em;
-      }
-      
       .game-box {
-        width: 24px;
-        height: 24px;
+        width: 22px;
+        height: 22px;
+        font-size: 0.6em;
       }
     }
   </style>
 </head>
-<body>
-  <div class="container">
-    <header>
-      <h1>Superliga 2026</h1>
-      <p class="subtitle">Players Statistics & Rankings</p>
-      <div class="nav-links">
-        <%= link_to "All Games", root_path %>
-        <%= link_to "Players Statistics", players_path, class: "active" %>
+<body class="bg-neutral-50 min-h-screen p-4 md:p-5">
+  <div class="max-w-7xl mx-auto bg-white border border-neutral-200 rounded-lg shadow-sm overflow-hidden">
+    <header class="bg-white border-b border-neutral-200 p-6 md:p-8">
+      <h1 class="text-3xl md:text-4xl font-bold text-neutral-900 mb-2 tracking-tight">Superliga 2026</h1>
+      <p class="text-neutral-600 mb-5">Statystyki i Ranking Zawodników</p>
+      <div class="border-b border-neutral-200 -mb-px">
+        <nav class="flex gap-1" aria-label="Tabs">
+          <%= link_to root_path, class: 'px-4 py-2 font-medium text-sm border-b-2 border-transparent text-neutral-500 hover:text-neutral-700 hover:border-neutral-300' do %>
+            Wszystkie Mecze
+          <% end %>
+          <%= link_to players_path, class: 'px-4 py-2 font-medium text-sm border-b-2 border-neutral-900 text-neutral-900' do %>
+            Statystyki Zawodników
+          <% end %>
+        </nav>
       </div>
     </header>
     
-    <div class="table-wrapper">
-      <table>
+    <div class="overflow-x-auto">
+      <table class="w-full border-collapse">
         <thead>
-          <tr>
-            <th>#</th>
-            <th>Player</th>
-            <th>Games</th>
-            <th>Wins</th>
-            <th>Draws</th>
-            <th>Losses</th>
-            <th>Result</th>
-            <th>Absence %</th>
-            <th>Last 5 Games</th>
+          <tr class="bg-neutral-50">
+            <th class="px-3 md:px-4 py-3 text-left text-xs font-semibold text-neutral-600 uppercase tracking-wider border-b border-neutral-200">#</th>
+            <th class="px-3 md:px-4 py-3 text-left text-xs font-semibold text-neutral-600 uppercase tracking-wider border-b border-neutral-200">Zawodnik</th>
+            <th class="px-3 md:px-4 py-3 text-center text-xs font-semibold text-neutral-600 uppercase tracking-wider border-b border-neutral-200 hidden sm:table-cell">Mecze</th>
+            <th class="px-3 md:px-4 py-3 text-center text-xs font-semibold text-neutral-600 uppercase tracking-wider border-b border-neutral-200">W</th>
+            <th class="px-3 md:px-4 py-3 text-center text-xs font-semibold text-neutral-600 uppercase tracking-wider border-b border-neutral-200 hidden md:table-cell">R</th>
+            <th class="px-3 md:px-4 py-3 text-center text-xs font-semibold text-neutral-600 uppercase tracking-wider border-b border-neutral-200 hidden md:table-cell">P</th>
+            <th class="px-3 md:px-4 py-3 text-center text-xs font-semibold text-neutral-600 uppercase tracking-wider border-b border-neutral-200">Wynik</th>
+            <th class="px-3 md:px-4 py-3 text-center text-xs font-semibold text-neutral-600 uppercase tracking-wider border-b border-neutral-200 hidden lg:table-cell">Absencja</th>
+            <th class="px-3 md:px-4 py-3 text-center text-xs font-semibold text-neutral-600 uppercase tracking-wider border-b border-neutral-200">Ostatnie 5</th>
           </tr>
         </thead>
         <tbody>
           <% @players_stats.each_with_index do |stat, index| %>
-            <tr>
-              <td class="rank"><%= index + 1 %></td>
-              <td class="player-name"><%= stat[:player].name %></td>
-              <td class="stat-number"><%= stat[:games_played] %></td>
-              <td class="stat-number wins"><%= stat[:wins] %></td>
-              <td class="stat-number draws"><%= stat[:draws] %></td>
-              <td class="stat-number losses"><%= stat[:losses] %></td>
-              <td class="total-result <%= stat[:total_result] > 0 ? 'positive' : (stat[:total_result] < 0 ? 'negative' : 'neutral') %>">
+            <tr class="hover:bg-neutral-50 transition">
+              <td class="px-3 md:px-4 py-3 md:py-4 border-b border-neutral-100 text-center font-bold text-neutral-900 tabular-nums"><%= index + 1 %></td>
+              <td class="px-3 md:px-4 py-3 md:py-4 border-b border-neutral-100 font-semibold text-neutral-900 text-sm md:text-base"><%= stat[:player].name %></td>
+              <td class="px-3 md:px-4 py-3 md:py-4 border-b border-neutral-100 text-center font-semibold tabular-nums text-neutral-900 hidden sm:table-cell"><%= stat[:games_played] %></td>
+              <td class="px-3 md:px-4 py-3 md:py-4 border-b border-neutral-100 text-center font-semibold tabular-nums text-neutral-900"><%= stat[:wins] %></td>
+              <td class="px-3 md:px-4 py-3 md:py-4 border-b border-neutral-100 text-center font-semibold tabular-nums text-neutral-600 hidden md:table-cell"><%= stat[:draws] %></td>
+              <td class="px-3 md:px-4 py-3 md:py-4 border-b border-neutral-100 text-center font-semibold tabular-nums text-neutral-500 hidden md:table-cell"><%= stat[:losses] %></td>
+              <td class="px-3 md:px-4 py-3 md:py-4 border-b border-neutral-100 text-center font-bold text-base md:text-lg tabular-nums <%= stat[:total_result] > 0 ? 'text-neutral-900' : (stat[:total_result] < 0 ? 'text-neutral-500' : 'text-neutral-400') %>">
                 <%= stat[:total_result] > 0 ? '+' : '' %><%= stat[:total_result] %>
               </td>
-              <td class="absence-rate"><%= stat[:absence_rate] %>%</td>
-              <td>
-                <div class="last-games">
+              <td class="px-3 md:px-4 py-3 md:py-4 border-b border-neutral-100 text-center font-semibold tabular-nums hidden lg:table-cell"><%= stat[:absence_rate] %>%</td>
+              <td class="px-3 md:px-4 py-3 md:py-4 border-b border-neutral-100">
+                <div class="flex gap-1 justify-center items-center">
                   <% stat[:last_5_teams].reverse.each do |team| %>
                     <% 
                       box_class = if team.result.nil?
@@ -298,12 +115,12 @@
                         when 'absence' then '-'
                       end
                     %>
-                    <div class="game-box <%= box_class %>" title="<%= team.game.date.strftime('%b %d') %>: <%= team.result || 'Absent' %>">
+                    <div class="game-box <%= box_class %>" title="<%= team.game.date.strftime('%d.%m') %>: <%= team.result || 'Nieobecny' %>">
                       <%= box_symbol %>
                     </div>
                   <% end %>
                   <% (5 - stat[:last_5_teams].count).times do %>
-                    <div class="game-box absence" title="No game">
+                    <div class="game-box absence" title="Brak meczu">
                       -
                     </div>
                   <% end %>

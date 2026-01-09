@@ -26,10 +26,24 @@ end
 
 def generate_players
   [
-   'Adrian', 'Adam', 'Bartek', 'Krzysztof', 'Krzysztof B.', 'Artur',
-   'Darek', 'Fasol', 'Grzesiek', 'Tomek', 'Mirek', 'Jacek', 'Mariusz', 'Bogdan'
-  ].each do |name|
-    Player.find_or_create_by!(name:)
+    { name: 'Bartek', power: 100 },
+    { name: 'Adrian', power: 95 },
+    { name: 'Mirek', power: 85 },
+    { name: 'Mariusz', power: 80 },
+    { name: 'Grzesiek', power: 80 },
+    { name: 'Fasol', power: 75 },
+    { name: 'Artur', power: 75 },
+    { name: 'Jacek', power: 65 },
+    { name: 'Krzysztof', power: 65 },
+    { name: 'Bogdan', power: 55 },
+    { name: 'Krzysztof B.', power: 50 },
+    { name: 'Darek', power: 40 },
+    { name: 'Tomek', power: 40 },
+    { name: 'Adam', power: 20 }
+  ].each do |player_data|
+    Player.find_or_create_by!(name: player_data[:name]) do |player|
+      player.power = player_data[:power]
+    end
   end
 
   puts "Created #{Player.count} players"
@@ -38,26 +52,26 @@ end
 generate_games
 generate_players
 
-# Mark first game as played and set up teams with players
-first_game = Game.first
-first_game.update!(played: true)
+# # Mark first game as played and set up teams with players
+# first_game = Game.first
+# first_game.update!(played: true)
 
-teams = first_game.teams
+# teams = first_game.teams
 
-[ 'Adrian', 'Artur', 'Tomek', 'Darek', 'Fasol' ].each do |player_name|
-  player = Player.find_by(name: player_name)
-  team = teams.first
-  team.players << player unless team.players.include?(player)
-  team.result = -5
-  team.save!
-end
+# [ 'Adrian', 'Artur', 'Tomek', 'Darek', 'Fasol' ].each do |player_name|
+#   player = Player.find_by(name: player_name)
+#   team = teams.first
+#   team.players << player unless team.players.include?(player)
+#   team.result = -5
+#   team.save!
+# end
 
-[ 'Bartek', 'Adam', 'Krzysztof', 'Krzysztof B.', 'Jacek' ].each do |player_name|
-  player = Player.find_by(name: player_name)
-  team = teams.last
-  team.players << player unless team.players.include?(player)
-  team.result = 5
-  team.save!
-end
+# [ 'Bartek', 'Adam', 'Krzysztof', 'Krzysztof B.', 'Jacek' ].each do |player_name|
+#   player = Player.find_by(name: player_name)
+#   team = teams.last
+#   team.players << player unless team.players.include?(player)
+#   team.result = 5
+#   team.save!
+# end
 
-puts "Marked first game as played and assigned players to teams"
+# puts "Marked first game as played and assigned players to teams"

@@ -3,285 +3,71 @@
 <head>
   <title>Game Details - Superliga 2026</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
-      background: #fafafa;
-      min-height: 100vh;
-      padding: 20px;
-      color: #0a0a0a;
-    }
-    
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    
-    header {
-      background: white;
-      border: 1px solid #e5e5e5;
-      border-radius: 8px;
-      padding: 30px;
-      margin-bottom: 24px;
-      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-      text-align: center;
-    }
-    
-    h1 {
-      color: #0a0a0a;
-      font-size: 2.2em;
-      font-weight: 700;
-      margin-bottom: 10px;
-      letter-spacing: -0.025em;
-    }
-    
-    .game-date {
-      color: #737373;
-      font-size: 1.1em;
-      margin-bottom: 16px;
-      font-weight: 500;
-    }
-    
-    .status-badge {
-      display: inline-block;
-      padding: 6px 14px;
-      border-radius: 6px;
-      font-size: 0.875rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.025em;
-    }
-    
-    .status-played {
-      background: #f5f5f5;
-      color: #525252;
-      border: 1px solid #e5e5e5;
-    }
-    
-    .status-upcoming {
-      background: #0a0a0a;
-      color: white;
-    }
-    
-    .back-link {
-      display: inline-block;
-      margin-top: 16px;
-      padding: 8px 16px;
-      background: white;
-      color: #0a0a0a;
-      text-decoration: none;
-      font-weight: 500;
-      border: 1px solid #e5e5e5;
-      border-radius: 6px;
-      font-size: 0.875rem;
-      transition: background 0.2s;
-    }
-    
-    .back-link:hover {
-      background: #f5f5f5;
-    }
-    
-    .teams-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-      gap: 20px;
-      margin-bottom: 20px;
-    }
-    
-    .team-card {
-      background: white;
-      border: 1px solid #e5e5e5;
-      border-radius: 8px;
-      padding: 24px;
-      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-    }
-    
-    .team-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-      padding-bottom: 16px;
-      border-bottom: 1px solid #e5e5e5;
-    }
-    
-    .team-title {
-      font-size: 1.5em;
-      color: #0a0a0a;
-      font-weight: 700;
-      letter-spacing: -0.025em;
-    }
-    
-    .team-result {
-      font-size: 1.75em;
-      font-weight: 700;
-      padding: 8px 16px;
-      border-radius: 6px;
-      min-width: 70px;
-      text-align: center;
-    }
-    
-    .result-positive {
-      background: #f5f5f5;
-      color: #0a0a0a;
-      border: 2px solid #0a0a0a;
-    }
-    
-    .result-negative {
-      background: white;
-      color: #525252;
-      border: 2px solid #e5e5e5;
-    }
-    
-    .result-neutral {
-      background: #f5f5f5;
-      color: #525252;
-      border: 1px solid #e5e5e5;
-    }
-    
-    .result-none {
-      background: white;
-      color: #a3a3a3;
-      border: 1px solid #e5e5e5;
-      font-size: 1em;
-    }
-    
-    .players-list {
-      list-style: none;
-    }
-    
-    .player-item {
-      padding: 12px 16px;
-      margin-bottom: 8px;
-      background: #fafafa;
-      border: 1px solid #f5f5f5;
-      border-radius: 6px;
-      transition: all 0.15s;
-    }
-    
-    .player-item:hover {
-      background: white;
-      border-color: #e5e5e5;
-    }
-    
-    .player-name {
-      font-size: 0.95em;
-      font-weight: 500;
-      color: #0a0a0a;
-    }
-    
-    .no-players {
-      text-align: center;
-      padding: 32px;
-      color: #a3a3a3;
-      font-size: 0.95em;
-      background: #fafafa;
-      border: 1px solid #f5f5f5;
-      border-radius: 6px;
-    }
-    
-    .no-teams {
-      background: white;
-      border: 1px solid #e5e5e5;
-      border-radius: 8px;
-      padding: 48px;
-      text-align: center;
-      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-    }
-    
-    .no-teams p {
-      color: #737373;
-      font-size: 1.1em;
-      margin-bottom: 20px;
-    }
-    
-    .btn-generate {
-      display: inline-block;
-      padding: 10px 20px;
-      background: #0a0a0a;
-      color: white;
-      text-decoration: none;
-      border-radius: 6px;
-      font-weight: 500;
-      font-size: 0.95em;
-      transition: background 0.2s;
-    }
-    
-    .btn-generate:hover {
-      background: #262626;
-    }
-    
-    @media (max-width: 768px) {
-      .teams-container {
-        grid-template-columns: 1fr;
-      }
-      
-      h1 {
-        font-size: 1.5em;
-      }
-      
-      .team-result {
-        font-size: 1.5em;
-        min-width: 60px;
-      }
-    }
-  </style>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-  <div class="container">
-    <header>
-      <h1>Game Details</h1>
-      <div class="game-date">
-        <%= @game.date.strftime('%A, %B %d, %Y at %I:%M %p') %>
+<body class="bg-neutral-50 min-h-screen p-4 md:p-5">
+  <div class="max-w-6xl mx-auto">
+    <header class="bg-white border border-neutral-200 rounded-lg p-6 md:p-8 mb-6 shadow-sm text-center">
+      <h1 class="text-2xl md:text-3xl font-bold text-neutral-900 mb-2 tracking-tight">Szczegóły Meczu</h1>
+      <div class="text-neutral-600 text-base md:text-lg mb-4 font-medium">
+        <%= @game.date.strftime('%A, %d %B %Y, %H:%M') %>
       </div>
-      <span class="status-badge <%= @game.played ? 'status-played' : 'status-upcoming' %>">
-        <%= @game.played ? 'Played' : 'Upcoming' %>
-      </span>
+      <% if @game.played %>
+        <span class="inline-block px-3 py-1.5 bg-neutral-100 text-neutral-600 border border-neutral-200 rounded-md text-xs md:text-sm font-semibold uppercase tracking-wide">Rozegrane</span>
+      <% else %>
+        <span class="inline-block px-3 py-1.5 bg-neutral-900 text-white rounded-md text-xs md:text-sm font-semibold uppercase tracking-wide">Nadchodzące</span>
+      <% end %>
       <br>
-      <%= link_to '← Back to Games', root_path, class: 'back-link' %>
+      <%= link_to '← Powrót do Meczy', root_path, class: 'inline-block mt-4 px-4 py-2 bg-white text-neutral-900 border border-neutral-200 rounded-md font-medium text-sm hover:bg-neutral-50 transition' %>
     </header>
     
     <% if @game.teams.any? %>
-      <div class="teams-container">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5 mb-5">
         <% @game.teams.each_with_index do |team, index| %>
-          <div class="team-card">
-            <div class="team-header">
-              <h2 class="team-title">Team <%= index == 0 ? 'A' : 'B' %></h2>
+          <div class="bg-white border border-neutral-200 rounded-lg p-5 md:p-6 shadow-sm">
+            <div class="flex justify-between items-center mb-5 pb-4 border-b border-neutral-200">
+              <h2 class="text-xl md:text-2xl font-bold text-neutral-900 tracking-tight">Drużyna <%= index == 0 ? 'A' : 'B' %></h2>
               <% if team.result %>
-                <div class="team-result <%= team.result > 0 ? 'result-positive' : (team.result < 0 ? 'result-negative' : 'result-neutral') %>">
-                  <%= team.result > 0 ? '+' : '' %><%= team.result %>
-                </div>
+                <% if team.result > 0 %>
+                  <div class="text-2xl md:text-3xl font-bold px-3 md:px-4 py-2 rounded-md bg-neutral-100 text-neutral-900 border-2 border-neutral-900 min-w-[60px] md:min-w-[70px] text-center">
+                    +<%= team.result %>
+                  </div>
+                <% elsif team.result < 0 %>
+                  <div class="text-2xl md:text-3xl font-bold px-3 md:px-4 py-2 rounded-md bg-white text-neutral-600 border-2 border-neutral-200 min-w-[60px] md:min-w-[70px] text-center">
+                    <%= team.result %>
+                  </div>
+                <% else %>
+                  <div class="text-2xl md:text-3xl font-bold px-3 md:px-4 py-2 rounded-md bg-neutral-50 text-neutral-600 border border-neutral-200 min-w-[60px] md:min-w-[70px] text-center">
+                    0
+                  </div>
+                <% end %>
               <% else %>
-                <div class="team-result result-none">TBD</div>
+                <div class="text-base md:text-lg px-3 md:px-4 py-2 rounded-md bg-white text-neutral-400 border border-neutral-200 min-w-[60px] md:min-w-[70px] text-center font-semibold">
+                  TBD
+                </div>
               <% end %>
             </div>
             
             <% if team.players.any? %>
-              <ul class="players-list">
+              <ul class="space-y-2">
                 <% team.players.each do |player| %>
-                  <li class="player-item">
-                    <span class="player-name"><%= player.name %></span>
+                  <li class="px-3 md:px-4 py-3 bg-neutral-50 border border-neutral-100 rounded-md hover:bg-white hover:border-neutral-200 transition">
+                    <span class="text-sm md:text-base font-medium text-neutral-900"><%= player.name %></span>
                   </li>
                 <% end %>
               </ul>
             <% else %>
-              <div class="no-players">
-                No players assigned yet
+              <div class="text-center py-8 text-neutral-400 text-sm bg-neutral-50 border border-neutral-100 rounded-md">
+                Brak przypisanych zawodników
               </div>
             <% end %>
           </div>
         <% end %>
       </div>
     <% else %>
-      <div class="no-teams">
-        <p>No teams have been created for this game yet</p>
-        <%= link_to "Generate Teams", generate_teams_game_path(@game), method: :post, class: 'btn-generate' %>
+      <div class="bg-white border border-neutral-200 rounded-lg p-8 md:p-12 shadow-sm text-center">
+        <p class="text-neutral-600 text-base md:text-lg mb-5">Nie utworzono jeszcze drużyn dla tego meczu</p>
+        <%= link_to "Generuj Drużyny", generate_teams_game_path(@game), class: 'inline-block px-5 py-2.5 bg-neutral-900 text-white rounded-md font-medium text-sm md:text-base hover:bg-neutral-800 transition' %>
       </div>
     <% end %>
   </div>
